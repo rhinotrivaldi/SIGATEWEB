@@ -22,7 +22,7 @@ class RoleSeeder extends Seeder
             'admin', 'user'
         ];
 
-        foreach ($data as $value) {
+                foreach ($data as $value) {
             Role::insert([
                 'name' => $value
             ]);

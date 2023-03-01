@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('vehicle_logs', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('vehicle_id');
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->unsignedBigInteger('user_id');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->date('in_date');
             $table->date('out_date');
             $table->date('period_date')->nullable();
+            
             $table->timestamps();
         });
     }
