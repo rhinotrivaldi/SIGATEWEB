@@ -37,19 +37,26 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form action="" method="POST" class="user">
+                            <form action="{{ route('registerProccess') }}" method="POST" class="user">
                                 @csrf
+
+                                @if (session('status'))
+                                            <div class="alert alert-success">
+                                                {{ session('status') }}
+                                            </div>
+                                        @endif
+
                                 <div class="form-group">
-                                    <input name="name" type="text" class="form-control form-control-user"
-                                    @error('name') is-invalid @enderror id="exampleInputName" placeholder="Name">
+                                    <input name="name" type="text" class="form-control form-control-user
+                                    @error('name') is-invalid @enderror" id="exampleInputName" placeholder="Name">
                                     @error('name')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                         
                                 </div>
                                 <div class="form-group">
-                                    <input name="email" type="email" class="form-control form-control-user"
-                                    @error('email') is-invalid @enderror id="exampleInputEmail"
+                                    <input name="email" type="email" class="form-control form-control-user
+                                    @error('email') is-invalid @enderror" id="exampleInputEmail"
                                     placeholder="Email Address">
                                     @error('email')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -59,8 +66,8 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input name="password" type="password"
-                                        class="form-control form-control-user"
-                                        @error('password') is-invalid @enderror
+                                        class="form-control form-control-user
+                                        @error('password') is-invalid @enderror"
                                             id="exampleInputPassword" placeholder="Password">
                                         @error('password')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -69,8 +76,8 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input name="password_confirmation" type="password"
-                                        class="form-control form-control-user"
-                                        @error('password_confirmation') is-invalid @enderror
+                                        class="form-control form-control-user
+                                        @error('password_confirmation') is-invalid @enderror"
                                             id="exampleRepeatPassword" placeholder="Repeat Password">
                                         @error('password_confirmation')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -85,7 +92,7 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                <a class="small" href="#">Forgot Password?</a>
                             </div>
                             <div class="text-center">
                                 <a class="small" href="{{ route('login') }}">Already have an account? Login!</a>
