@@ -21,6 +21,11 @@ class AuthController extends Controller
         return view('register');
     }
 
+    public function forgot()
+    {
+        return view('forgot-password');
+    }
+
     public function authentication(Request $request)
     {
         $credetials = $request->validate([
@@ -41,7 +46,7 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
             if(Auth::user()->role_id == 1) {
-                return redirect('admin/dashboard');
+                return redirect('dashboard');
             }
             return redirect('dashboard');
         }
@@ -50,6 +55,7 @@ class AuthController extends Controller
         Session::flash('status', 'Login Invalid');
         return redirect('login');
     }
+    
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

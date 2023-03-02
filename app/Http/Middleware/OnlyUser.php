@@ -17,7 +17,7 @@ class OnlyUser
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::user()->role_id != 2) {
-            return redirect('admin/dashboard');
+            return redirect('dashboard');
         }
 
         return $next($request);
