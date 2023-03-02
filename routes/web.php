@@ -34,7 +34,14 @@ Route::middleware('auth')->group(function () {
     Route::get('index', [UserController::class, 'index'])->middleware('only_user');
     Route::get('dashboard', [AdminController::class, 'index'])->middleware('only_admin')->name('dashboard');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    
+    Route::get('vehicle', [VehicleController::class, 'index'])->name('vehicle')->middleware('only_admin');
+    Route::get('category', [CategoryController::class, 'index'])->name('category')->middleware('only_admin');
+    Route::get('category-add', [CategoryController::class, 'add'])->name('category-add')->middleware('only_admin');
+    Route::post('category-add', [CategoryController::class, 'store'])->name('category-store')->middleware('only_admin');
+    Route::get('/category-edit/{slug}', [CategoryController::class, 'edit'])->middleware('only_admin');
+    Route::patch('/category-edit/{slug}', [CategoryController::class, 'update'])->middleware('only_admin');
+    Route::get('category-delete/{slug}', [CategoryController::class, 'delete'])->middleware('only_admin');
+    Route::get('category-deleted', [CategoryController::class, 'deleted'])->name('category-deleted')->middleware('only_admin');
+    Route::get('category-restore/{slug}', [CategoryController::class, 'restore'])->middleware('only_admin');
 });
-
-Route::get('vehicle', [VehicleController::class, 'index'])->name('vehicle');
-Route::get('category', [CategoryController::class, 'index'])->name('category');

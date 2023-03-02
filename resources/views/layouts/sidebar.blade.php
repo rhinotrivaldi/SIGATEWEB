@@ -74,11 +74,13 @@
     </div>
 
     <!-- Nav Item - Categories -->
+    @if (Auth::user()->role_id == 1)
     <li class="nav-item">
         <a class="nav-link" href="{{ route('category') }}">
             <i class="fas fa-fw fa-folder"></i>
             <span>Categories</span></a>
     </li>
+    @endif
 
     <!-- Nav Item - Logs Collapse Menu -->
     <li class="nav-item">
