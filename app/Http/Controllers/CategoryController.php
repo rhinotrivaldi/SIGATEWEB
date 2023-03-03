@@ -57,6 +57,7 @@ class CategoryController extends Controller
     public function deleted()
     {
         $deleted = Category::onlyTrashed()->get();
+
         return view('category.deleted', ['deleted' => $deleted]);
     }
 

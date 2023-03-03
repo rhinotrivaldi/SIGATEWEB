@@ -36,6 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     
     Route::get('vehicle', [VehicleController::class, 'index'])->name('vehicle')->middleware('only_admin');
+    Route::get('vehicle-add', [VehicleController::class, 'add'])->name('vehicle-add')->middleware('only_admin');
+    Route::post('vehicle-add', [VehicleController::class, 'store'])->name('store')->middleware('only_admin');
+    Route::get('/vehicle-edit/{slug}', [VehicleController::class, 'edit'])->middleware('only_admin');
+    Route::put('/vehicle-edit/{slug}', [VehicleController::class, 'update'])->middleware('only_admin');
+    Route::get('vehicle-delete/{slug}', [VehicleController::class, 'delete'])->middleware('only_admin');
+
     Route::get('category', [CategoryController::class, 'index'])->name('category')->middleware('only_admin');
     Route::get('category-add', [CategoryController::class, 'add'])->name('category-add')->middleware('only_admin');
     Route::post('category-add', [CategoryController::class, 'store'])->name('category-store')->middleware('only_admin');

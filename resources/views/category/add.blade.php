@@ -22,10 +22,11 @@
                         </ul>
                     </div>
                     @endif
-                    <a href="{{ route('category') }}" class="btn btn-sm btn-secondary shadow-sm mb-3"><span>Back</span></a>
+                    <a href="{{ route('category') }}" class="btn btn-sm btn-secondary shadow-sm mb-3">
+                        <span>Back</span></a>
                     <div class="form-group">
                         <label for="">Category Name</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                     </div>
                 </div>
                 <div class="card-footer">

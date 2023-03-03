@@ -12,7 +12,6 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    {{ Auth::user()->role_id }}
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -57,7 +56,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
                 @if (Auth::user()->role_id == 1)
-                <a class="collapse-item" href="utilities-color.html">Add Vehicle</a>
+                <a class="collapse-item" href="{{ route('vehicle-add') }}">Add Vehicle</a>
                 @endif    
                 <a class="collapse-item" href="{{ route('vehicle') }}">List Vehicles</a>
 
