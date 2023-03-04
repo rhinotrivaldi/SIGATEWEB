@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Vehicle;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class VehicleController extends Controller
 {
@@ -55,14 +57,15 @@ class VehicleController extends Controller
             'vehicle_name' => 'required',
             'number_plate' => 'required|',
         ]);
-
+        
+        $vehicle = Vehicle::where('slug', $slug)->first();
         if ($request->file('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
             $newName = $request->vehicle_name.'-'.$request->number_plate.'-'.now()->timestamp.'.'.$extension;
             $request->file('image')->storeAs('vehiclePic', $newName);
+            Storage::delete('vehiclePic'.$vehicle->picture);
             $request['picture'] = $newName;
         }
-        $vehicle = Vehicle::where('slug', $slug)->first();
         $vehicle->slug = null;
         $vehicle->update($request->all());
 

@@ -6,9 +6,9 @@
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-<form action="/vehicle-edit/{{ $vehicle->slug }}" method="post">
+<form action="/vehicle-edit/{{ $vehicle->slug }}" method="post" enctype="multipart/form-data">
     @csrf
-    @method('put')
+    @method('PUT')
     <div class="row">
         <div class="col-12">
             <div class="card shadow mb-4">
