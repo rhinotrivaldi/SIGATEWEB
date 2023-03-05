@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('index', [UserController::class, 'index'])->middleware('only_user');
     Route::get('dashboard', [AdminController::class, 'index'])->middleware('only_admin')->name('dashboard');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('user', [UsersController::class, 'index'])->name('user')->middleware('only_admin');
+    Route::get('user-add', [UsersController::class, 'add'])->name('user-add')->middleware('only_admin');
+    Route::get('user-registered', [UsersController::class, 'registered'])->name('user-registered')->middleware('only_admin');
+    Route::get('user-approve/{slug}', [UsersController::class, 'approve'])->name('user-approve')->middleware('only_admin');
     
     Route::get('vehicle', [VehicleController::class, 'index'])->name('vehicle')->middleware('only_admin');
     Route::get('vehicle-add', [VehicleController::class, 'add'])->name('vehicle-add')->middleware('only_admin');

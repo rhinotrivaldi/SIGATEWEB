@@ -55,7 +55,8 @@ class VehicleController extends Controller
         
         $validated = $request->validate([
             'vehicle_name' => 'required',
-            'number_plate' => 'required|',
+            'number_plate' => 'required',
+            'image' => 'required|mimes:jpeg,png,jpg,gif'
         ]);
         
         $vehicle = Vehicle::where('slug', $slug)->first();
