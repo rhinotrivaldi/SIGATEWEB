@@ -42,11 +42,12 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>User</th>
+                        <th>Owner</th>
                         <th>Vehicle Name</th>
                         <th>Vehicle Number Plate</th>
                         <th>Category</th>
                         <th>Picture</th>
+                        <th>Position Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -76,6 +77,7 @@
                                     @endif
                                 </div>
                             </td>
+                            <td>{{ $item->status }}</td>
                             <td>
                                 <a href="/vehicle-edit/{{$item->slug}}" class="btn btn-warning btn-icon-split">
                                     <span class="text">Edit</span></a>

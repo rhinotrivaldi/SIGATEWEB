@@ -92,7 +92,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Data Logs</h6>
                 <a class="collapse-item" href="{{ route('logs') }}">Vehicle Logs</a>
+                @if (Auth::user()->role_id == 1)
                 <a class="collapse-item" href="{{ route('dummy') }}">Dummy Logs</a>
+                @endif
             </div>
         </div>
     </li>

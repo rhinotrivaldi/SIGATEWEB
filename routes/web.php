@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('vehicle-logs', [VehicleLogsController::class, 'index'])->name('logs');
     Route::get('vehicle-dummy', [VehicleLogsController::class, 'dummy'])->name('dummy')->middleware('only_admin');
-    Route::post('dummy-in', [VehicleLogsController::class, 'storeIn'])->name('dummy')->middleware('only_admin');
+    Route::post('dummy-in', [VehicleLogsController::class, 'storeIn'])->name('dummy-in')->middleware('only_admin');
 
     Route::get('category', [CategoryController::class, 'index'])->name('category')->middleware('only_admin');
     Route::get('category-add', [CategoryController::class, 'add'])->name('category-add')->middleware('only_admin');

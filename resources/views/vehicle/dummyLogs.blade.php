@@ -4,6 +4,15 @@
 
 @section('content')
 
+    <div class="card-body">
+        <div class="md-3">
+            @if (session('message'))
+            <div class="alert {{ session('alert-class') }}">
+                {{ session('message') }}
+            </div>
+            @endif
+        </div>
+        
 <form action="/dummy-in" method="post">
     @csrf
     <div class="row">
@@ -37,7 +46,10 @@
                         <select class="form-control" id="number_plate" name="vehicle_id">
                             <option value="">Select Number Plate</option>
                             @foreach ($vehicles as $item)
-                                <option value="{{ $item->id }}">{{ $item->number_plate }}</option>
+                                <option value="{{ $item->id }}">{{ $item->number_plate }} - 
+                                    @foreach ($item->users as $user)
+                                    {{ $user->name }}
+                                @endforeach</option>
                             @endforeach
                         </select>
                     </div>
