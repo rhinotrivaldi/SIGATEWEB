@@ -53,4 +53,35 @@ class VehicleLogsController extends Controller
         }
         
     }
+
+    public function storeOut(Request $request)
+    {
+        $statusVehicle = Vehicle::findOrFail($request->vehicle_id)->only('status');
+
+        $dataLogs = VehicleLogs::where([['user_id', $request->user_id], ['vehicle_id', $request->vehicle_id]])->get();
+        $logs = $dataLogs->first();
+        $logs->out_date = Carbon::now('Asia/Jakarta')->toDateTimeString();
+        $logs->save();
+        
+        if ($statusVehicle['status'] != 'in') {
+            Session::flash('alert-class', 'alert-danger');
+            Session::flash('message', 'Vehicle position is out');
+            return redirect('vehicle-dummy');
+        }else {
+            try {
+                DB::beginTransaction();
+                $vehicle = Vehicle::findOrFail($request->vehicle_id);
+                $vehicle->status = 'out';
+                $vehicle->save();
+                DB::commit();
+
+                Session::flash('alert-class', 'alert-success');
+                Session::flash('message', 'Vehicle success got out, position is Out now!');
+                return redirect('vehicle-dummy');
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                dd($e);
+            }
+        }
+    }
 }

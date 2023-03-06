@@ -82,7 +82,7 @@
                     @endif
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <select class="form-control" id="name" name="name">
+                        <select class="form-control" id="name" name="user_id">
                             <option value="">Select User</option>
                             @foreach ($users as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -92,10 +92,13 @@
 
                     <div class="form-group">
                         <label for="number_plate">Number Plate</label>
-                        <select class="form-control" id="number_plate" name="number_plate">
+                        <select class="form-control" id="number_plate" name="vehicle_id">
                             <option value="">Select Number Plate</option>
                             @foreach ($vehicles as $item)
-                                <option value="{{ $item->id }}">{{ $item->number_plate }}</option>
+                                <option value="{{ $item->id }}">{{ $item->number_plate }} - 
+                                    @foreach ($item->users as $user)
+                                    {{ $user->name }}
+                                @endforeach</option>
                             @endforeach
                         </select>
                     </div>

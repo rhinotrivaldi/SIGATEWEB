@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,7 +26,11 @@ class VehicleController extends Controller
 
 
         } else {
-            $vehicles = Vehicle::all();
+            if (Auth::user()->role_id == 1) {
+                $vehicles = Vehicle::all();
+            } else {
+                // $vehicles = Vehicle::all();
+            }
         }
 
         return view('vehicle.index', ['vehicles' => $vehicles, 'categories' => $categories, 'users' => $users]);

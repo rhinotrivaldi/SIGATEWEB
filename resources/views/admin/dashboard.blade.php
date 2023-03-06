@@ -102,16 +102,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @foreach ($logs as $item)
+                            @foreach ($logs as $item)
+                                <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ item->user->name }}</td>
-                                    <td>{{ item->vehicle->number_plate }}</td>
-                                    <td>{{ item->in_date }}</td>
-                                    <td>{{ item->out_date }}</td>
-                                    <td>{{ item->vehicle->status }}</td>
-                                @endforeach
-                            </tr>
+                                    <td>{{ $item->user->name }}</td>
+                                    <td>{{ $item->vehicle->number_plate }}</td>
+                                    <td>{{ $item->in_date }}</td>
+                                    <td>{{ $item->out_date }}</td>
+                                    <td>{{ $item->vehicle->status }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
