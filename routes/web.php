@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\VehicleLogsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,12 +42,16 @@ Route::middleware('auth')->group(function () {
     Route::get('user-registered', [UsersController::class, 'registered'])->name('user-registered')->middleware('only_admin');
     Route::get('user-approve/{slug}', [UsersController::class, 'approve'])->name('user-approve')->middleware('only_admin');
     
-    Route::get('vehicle', [VehicleController::class, 'index'])->name('vehicle')->middleware('only_admin');
+    Route::get('vehicle', [VehicleController::class, 'index'])->name('vehicle');
     Route::get('vehicle-add', [VehicleController::class, 'add'])->name('vehicle-add')->middleware('only_admin');
     Route::post('vehicle-add', [VehicleController::class, 'store'])->name('store')->middleware('only_admin');
     Route::get('/vehicle-edit/{slug}', [VehicleController::class, 'edit'])->middleware('only_admin');
     Route::put('/vehicle-edit/{slug}', [VehicleController::class, 'update'])->middleware('only_admin');
     Route::get('vehicle-delete/{slug}', [VehicleController::class, 'delete'])->middleware('only_admin');
+
+    Route::get('vehicle-logs', [VehicleLogsController::class, 'index'])->name('logs');
+    Route::get('vehicle-dummy', [VehicleLogsController::class, 'dummy'])->name('dummy')->middleware('only_admin');
+    Route::post('dummy-in', [VehicleLogsController::class, 'storeIn'])->name('dummy')->middleware('only_admin');
 
     Route::get('category', [CategoryController::class, 'index'])->name('category')->middleware('only_admin');
     Route::get('category-add', [CategoryController::class, 'add'])->name('category-add')->middleware('only_admin');

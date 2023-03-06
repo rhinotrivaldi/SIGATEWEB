@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ class VehicleController extends Controller
 {
     public function index(Request $request)
     {
+        $users = User::all();
         $categories = Category::all();
         if ($request->category || $request->search) {
 
@@ -26,18 +28,20 @@ class VehicleController extends Controller
             $vehicles = Vehicle::all();
         }
 
-        return view('vehicle.index', ['vehicles' => $vehicles, 'categories' => $categories]);
+        return view('vehicle.index', ['vehicles' => $vehicles, 'categories' => $categories, 'users' => $users]);
     }
 
     public function add()
     {
         $categories = Category::all();
-        return view('vehicle.add', ['categories' => $categories]);
+        $users = User::where([['status', 'active'], ['id', '!=', 1]])->get();
+        return view('vehicle.add', ['categories' => $categories, 'users' => $users]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
+            // 'user' => 'required',
             'vehicle_name' => 'required',
             'number_plate' => 'required|unique:vehicles',
         ]);
@@ -51,6 +55,7 @@ class VehicleController extends Controller
 
         $request['picture'] = $newName;
         $vehicle = Vehicle::create($request->all());
+        $vehicle->users()->sync($request->users);
         $vehicle->categories()->sync($request->categories);
 
         return redirect('vehicle')->with('status', 'Vehicle Added Successfully');
@@ -58,9 +63,10 @@ class VehicleController extends Controller
 
     public function edit($slug)
     {
+        $users = User::where([['status', 'active'], ['id', '!=', 1]])->get();
         $vehicle = Vehicle::where('slug', $slug)->first();
         $categories = Category::all();
-        return view('vehicle.edit', ['vehicle' => $vehicle, 'categories' => $categories]);
+        return view('vehicle.edit', ['vehicle' => $vehicle, 'categories' => $categories, 'users' => $users]);
     }
 
     public function update(Request $request, $slug)
@@ -69,7 +75,6 @@ class VehicleController extends Controller
         $validated = $request->validate([
             'vehicle_name' => 'required',
             'number_plate' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg,gif'
         ]);
         
         $vehicle = Vehicle::where('slug', $slug)->first();
@@ -85,6 +90,10 @@ class VehicleController extends Controller
 
         if ($request->categories) {
             $vehicle->categories()->sync($request->categories);
+        }
+
+        if ($request->users) {
+            $vehicle->users()->sync($request->users);
         }
 
         return redirect('vehicle')->with('status', 'Vehicle Updated Successfully');

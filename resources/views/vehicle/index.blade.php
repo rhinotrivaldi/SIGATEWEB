@@ -42,6 +42,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
+                        <th>User</th>
                         <th>Vehicle Name</th>
                         <th>Vehicle Number Plate</th>
                         <th>Category</th>
@@ -53,6 +54,11 @@
                     @foreach ($vehicles as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>
+                                @foreach ($item->users as $user)
+                                    {{ $user->name }}
+                                @endforeach
+                            </td>
                             <td>{{ $item->vehicle_name }}</td>
                             <td>{{ $item->number_plate }}</td>
                             <td>

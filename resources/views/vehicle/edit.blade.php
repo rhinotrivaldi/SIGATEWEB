@@ -27,6 +27,25 @@
                     @endif
                     <a href="/vehicle" class="btn btn-sm btn-secondary shadow-sm mb-3"><span>Back</span></a>
                     <div class="form-group">
+                        <label for="user">User Vehicle</label>
+                        <select name="users[]" id="user" class="form-control">
+                            <option value="">Select User</option>
+                            @foreach ($users as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="">
+                        <label for="currentUser">Current User Vehicle</label>
+                        <ul>
+                            @foreach ($vehicle->users as $user)
+                                <li>{{ $user->name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
                         <label for="">Vehicle Name</label>
                         <input type="text" class="form-control" id="vehicle_name"
                         name="vehicle_name" value="{{ $vehicle->vehicle_name }}">
@@ -54,7 +73,6 @@
                                 <li>{{ $category->name }}</li>
                             @endforeach
                         </ul>
-
                     </div>
 
                     <div class="form-group">
