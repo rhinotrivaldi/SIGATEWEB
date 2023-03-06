@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->date('in_date');
-            $table->date('out_date');
-            $table->date('period_date')->nullable();
+            $table->timestamps('in_date');
+            $table->timestamps('out_date');
+            $table->timestamps('period_date');
             
             $table->timestamps();
         });
