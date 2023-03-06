@@ -17,7 +17,8 @@
             @endif
         </div>
         <a href="{{ route('user-add') }}" class="btn btn-sm btn-primary shadow-sm mb-3"><span>Add User</span></a>
-        <a href="{{ route('user-registered') }}" class="btn btn-sm btn-secondary shadow-sm mb-3"><span>New Register User</span></a>
+        <a href="{{ route('user-registered') }}" class="btn btn-sm btn-secondary shadow-sm mb-3">
+            <span>New Register User</span></a>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -25,6 +26,7 @@
                         <th>No.</th>
                         <th>Username</th>
                         <th>Email</th>
+                        <th>Role</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -35,6 +37,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->email }}</td>
+                            <td>
+                                {{ $item->role_id == 1 ? 'Administrator' : 'User' }}
+                            </td>
                             <td>{{ $item->status }}</td>
                             <td>
                                 <a href="user-edit/{{ $item->slug }}" class="btn btn-warning btn-icon-split">

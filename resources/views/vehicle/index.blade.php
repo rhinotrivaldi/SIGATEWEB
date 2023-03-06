@@ -17,7 +17,26 @@
             @endif
         </div>
         <a href="vehicle-add" class="btn btn-sm btn-primary shadow-sm mb-3"><span>Add Vehicle</span></a>
-        <a href="" class="btn btn-sm btn-secondary shadow-sm mb-3"><span>View Deleted Vehicle</span></a>
+        <a href="vehicle-delete" class="btn btn-sm btn-secondary shadow-sm mb-3"><span>View Deleted Vehicle</span></a>
+        <form action="" method="get">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <select name="category" id="" class="form-control mb-3">
+                        <option value="">Select Category</option>
+                        @foreach ($categories as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-12 col-sm-6" >
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="search"
+                        placeholder="Search" aria-describedby="basic-addon2">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+            </div>
+        </form>
+
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -44,7 +63,8 @@
                             <td>
                                 <div class="form-group">
                                     @if ($item->picture != '')
-                                        <img src="{{ asset('storage/vehiclePic/'.$item->picture) }}" alt="" width="150px">
+                                        <img src="{{ asset('storage/vehiclePic/'.$item->picture) }}"
+                                        alt="" width="150px">
                                     @else
                                         <img src="{{ asset('images/picture-not-found.jpg') }}" alt="" width="150px">
                                     @endif

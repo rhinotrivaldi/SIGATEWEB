@@ -10,10 +10,23 @@ use Illuminate\Support\Facades\Storage;
 
 class VehicleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $vehicles = Vehicle::all();
-        return view('vehicle.index', ['vehicles' => $vehicles]);
+        $categories = Category::all();
+        if ($request->category || $request->search) {
+
+            $vehicles = Vehicle::where('vehicle_name', 'like', '%'.$request->search.'%')
+                        ->orWhere('number_plate', 'like', '%'.$request->search.'%')
+                        ->orwhereHas('categories', function ($q) use ($request) {
+                            $q->where('categories.id', $request->category);
+                        })->get();
+
+
+        } else {
+            $vehicles = Vehicle::all();
+        }
+
+        return view('vehicle.index', ['vehicles' => $vehicles, 'categories' => $categories]);
     }
 
     public function add()

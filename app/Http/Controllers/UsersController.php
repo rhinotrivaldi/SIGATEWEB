@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,4 +28,5 @@ class UsersController extends Controller
 
         return redirect('user')->with('status', 'User Approved Successfully');
     }
+
 }

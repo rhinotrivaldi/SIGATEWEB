@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="">Picture</label>
+                        <label class="form-label" for="">Picture</label>
                         <input type="file" class="form-control" id="image" name="image">
                     </div>
                 </div>
