@@ -57,4 +57,9 @@ class User extends Authenticatable
             ]
         ];
     }
+
+    public function vehicleLogs()
+    {
+        return $this->hasMany(VehicleLogs::class);
+    }
 }
