@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TokenController;
 use App\Http\Controllers\VehicleLogsController;
 
 /*
@@ -62,4 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::get('category-delete/{slug}', [CategoryController::class, 'delete'])->middleware('only_admin');
     Route::get('category-deleted', [CategoryController::class, 'deleted'])->name('category-deleted')->middleware('only_admin');
     Route::get('category-restore/{slug}', [CategoryController::class, 'restore'])->middleware('only_admin');
+
+    Route::get('token', [TokenController::class, 'index'])->name('token')->middleware('only_admin');
+    Route::post('create-token', [TokenController::class, 'create'])->name('create-token')->middleware('only_admin');
 });

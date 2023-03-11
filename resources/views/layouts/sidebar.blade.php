@@ -98,6 +98,15 @@
             </div>
         </div>
     </li>
+
+    <!-- Nav Item - Tokens -->
+    @if (Auth::user()->role_id == 1)
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('token') }}">
+            <i class="fas fa-fw fa-rocket"></i>
+            <span>Token</span></a>
+    </li>
+    @endif
     
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
