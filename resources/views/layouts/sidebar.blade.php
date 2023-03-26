@@ -18,6 +18,7 @@
             <span>Dashboard</span></a>
     </li>
 
+    @if (Auth::user()->role_id == 1)
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -27,7 +28,6 @@
     </div>
 
     <!-- Nav Item - User Collapse Menu -->
-    @if (Auth::user()->role_id == 1)
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -45,6 +45,7 @@
     @endif
 
     <!-- Nav Item - Vehicle Collapse Menu -->
+    @if (Auth::user()->role_id == 1)
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
@@ -55,15 +56,14 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
-                @if (Auth::user()->role_id == 1)
                 <a class="collapse-item" href="{{ route('vehicle-add') }}">Add Vehicle</a>
-                @endif    
                 <a class="collapse-item" href="{{ route('vehicle') }}">List Vehicles</a>
-
             </div>
         </div>
     </li>
+    @endif
 
+    @if (Auth::user()->role_id == 1)
     <!-- Divider -->
     <hr class="sidebar-divider">
     
@@ -73,7 +73,6 @@
     </div>
 
     <!-- Nav Item - Categories -->
-    @if (Auth::user()->role_id == 1)
     <li class="nav-item">
         <a class="nav-link" href="{{ route('category') }}">
             <i class="fas fa-fw fa-folder"></i>
@@ -81,6 +80,7 @@
     </li>
     @endif
 
+    @if (Auth::user()->role_id == 1)
     <!-- Nav Item - Logs Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -92,12 +92,11 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Data Logs</h6>
                 <a class="collapse-item" href="{{ route('logs') }}">Vehicle Logs</a>
-                @if (Auth::user()->role_id == 1)
                 <a class="collapse-item" href="{{ route('dummy') }}">Dummy Logs</a>
-                @endif
             </div>
         </div>
     </li>
+    @endif
 
     <!-- Nav Item - Tokens -->
     @if (Auth::user()->role_id == 1)
@@ -123,7 +122,7 @@
  
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0" id="sidebarToggle" ></button>
     </div>
 
     <!-- Sidebar Message -->

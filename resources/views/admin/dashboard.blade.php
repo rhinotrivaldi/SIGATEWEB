@@ -98,6 +98,8 @@
                                 <th>Number Plate</th>
                                 <th>In Date</th>
                                 <th>Out Date</th>
+                                <th>Period Date</th>
+                                <th>Active Hour</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -109,11 +111,14 @@
                                     <td>{{ $item->vehicle->number_plate ?? '' }}</td>
                                     <td>{{ $item->in_date }}</td>
                                     <td>{{ $item->out_date }}</td>
+                                    <td>{{ $item->vehicle->period_date ?? ''}}</td>
+                                    <td>{{ $item->vehicle->active_hour ?? ''}}</td>
                                     <td>{{ $item->vehicle->status ?? ''}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $logs->links() }}
                 </div>
             </div>
         </div>

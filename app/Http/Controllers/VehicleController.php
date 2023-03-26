@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Category;
+use App\Models\VehicleLogs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -59,6 +61,23 @@ class VehicleController extends Controller
         }
 
         $request['picture'] = $newName;
+        
+        $num = $request['period_date'];
+        $request['period_date'] = Carbon::now('Asia/Jakarta')->addDay($num)->toDateString();
+
+        $time = $request['active_hour'];
+        switch ($time) {
+            case 0:
+                $request['active_hour'] = 'Daily';
+                break;
+            case 1:
+                $request['active_hour'] = 'Extends';
+                break;
+            default:
+                $request['active_hour'] = '24 Hour';
+                break;
+        }
+        
         $vehicle = Vehicle::create($request->all());
         $vehicle->users()->sync($request->users);
         $vehicle->categories()->sync($request->categories);
@@ -91,6 +110,23 @@ class VehicleController extends Controller
             $request['picture'] = $newName;
         }
         $vehicle->slug = null;
+
+        $num = $request['period_date'];
+        $request['period_date'] = Carbon::now('Asia/Jakarta')->addDay($num)->toDateString();
+
+        $time = $request['active_hour'];
+        switch ($time) {
+            case 0:
+                $request['active_hour'] = 'Daily';
+                break;
+            case 1:
+                $request['active_hour'] = 'Extends';
+                break;
+            default:
+                $request['active_hour'] = '24 Hour';
+                break;
+        }
+
         $vehicle->update($request->all());
 
         if ($request->categories) {
@@ -102,6 +138,14 @@ class VehicleController extends Controller
         }
 
         return redirect('vehicle')->with('status', 'Vehicle Updated Successfully');
+    }
+
+    public function detail($slug)
+    {
+        $users = User::where([['status', 'active'], ['id', '!=', 1]])->get();
+        $vehicle = Vehicle::where('slug', $slug)->first();
+        $categories = Category::all();
+        return view('vehicle.detail', ['vehicle' => $vehicle, 'categories' => $categories, 'users' => $users]);
     }
 
     public function delete($slug)

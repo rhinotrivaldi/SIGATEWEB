@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $logs = VehicleLogs::with(['user', 'vehicle'])->get();
+        $logs = VehicleLogs::with(['user', 'vehicle'])->paginate(10);
 
         $vehicleCount = Vehicle::count();
         $categoryCount = Category::count();

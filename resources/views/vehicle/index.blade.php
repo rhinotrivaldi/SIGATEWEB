@@ -77,8 +77,10 @@
                                     @endif
                                 </div>
                             </td>
-                            <td>{{ $item->status }}</td>
+                            <td>{{ (Str::upper($item->status))}}</td>
                             <td>
+                                <a href="/vehicle-detail/{{$item->slug}}" class="btn btn-success btn-icon-split">
+                                    <span class="text">Detail</span></a>
                                 <a href="/vehicle-edit/{{$item->slug}}" class="btn btn-warning btn-icon-split">
                                     <span class="text">Edit</span></a>
                                 <a href="/vehicle-delete/{{$item->slug}}" class="btn btn-danger btn-icon-split"

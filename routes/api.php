@@ -5,6 +5,7 @@ use Laravel\Sanctum\Sanctum;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Hardwarecontroller;
+use App\Http\Controllers\Api\LogController;
 use App\Http\Controllers\Api\VehicleController;
 
 /*
@@ -24,7 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/vehicle', ['VehicleController']);
+    Route::get('/vehicles', [VehicleController::class, 'index']);
+    Route::get('/logs', [LogController::class, 'index']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);

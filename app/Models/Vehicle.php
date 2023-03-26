@@ -21,6 +21,8 @@ class Vehicle extends Model
         'number_plate',
         'slug',
         'picture',
+        'period_date',
+        'active_hour',
     ];
 
     public function sluggable(): array
@@ -55,6 +57,11 @@ class Vehicle extends Model
     public function vehicleLogs()
     {
         return $this->hasMany(VehicleLogs::class);
+    }
+
+    public function UserVehicle()
+    {
+        return $this->hasMany(UserVehicle::class);
     }
 
 }

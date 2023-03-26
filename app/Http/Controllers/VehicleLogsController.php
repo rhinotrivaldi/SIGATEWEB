@@ -14,7 +14,7 @@ class VehicleLogsController extends Controller
 {
     public function index()
     {
-        $logs = VehicleLogs::with(['user', 'vehicle'])->get();
+        $logs = VehicleLogs::with(['user', 'vehicle'])->paginate(10);
         return view('vehicle.vehicleLogs', ['logs' => $logs]);
     }
 

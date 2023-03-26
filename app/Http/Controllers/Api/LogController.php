@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\UserVehicle;
+use App\Models\VehicleLogs;
 use Illuminate\Http\Request;
+use App\Http\Resources\LogResource;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\VehicleResource;
 use Illuminate\Support\Facades\Auth;
 
-class VehicleController extends Controller
+class LogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +17,13 @@ class VehicleController extends Controller
     {
         $user = auth()->user()->role_id;
         if ($user == '1') {
-            $vehicles = UserVehicle::all();
+            $logs = VehicleLogs::all();
         } else {
-            $vehicles = UserVehicle::with(['user', 'vehicle'])->where('user_id', Auth::user()->id)->get();
+            $logs = VehicleLogs::with(['user', 'vehicle'])->where('user_id', Auth::user()->id)->get();
         }
-        $a = $vehicles;
+        $a = $logs;
         //dd($a);
-        return VehicleResource::collection($a);
+        return LogResource::collection($a);
     }
 
     /**

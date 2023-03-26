@@ -88,7 +88,32 @@
                             <img src="{{ asset('images/picture-not-found.jpg') }}" alt="" width="300px">
                         @endif
                     </div>
+
+                    <div class="form-group">
+                        <label for="period_date">Periode Date</label>
+                        <input type="text" class="form-control" id="period_date" name="period_date"
+                            placeholder="In Day" value="{{ $vehicle->period_date }}">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="active_hour">Active Hour</label>
+                        <select name="active_hour" id="active_hour" class="form-control">
+                            <option value="0">Daily Shift | 07.00 - 16.00</option>
+                            <option value="1">Extends Shift | 07.00 - 22.00</option>
+                            <option value="2">Anytime | 00.00 - 23.59</option>
+                        </select>
+                    </div>
+    
+                    <div class="">
+                        <label for="current_active_hour">Current Active Hour</label>
+                        <ul>
+                            @if ($vehicle->period_date == '')
+                                <li>Belum Di Set</li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
+
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>

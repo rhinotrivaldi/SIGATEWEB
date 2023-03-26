@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('user', [UsersController::class, 'index'])->name('user')->middleware('only_admin');
     Route::get('user-add', [UsersController::class, 'add'])->name('user-add')->middleware('only_admin');
+    Route::post('user-store', [UsersController::class, 'store'])->name('user-store')->middleware('only_admin');
     Route::get('user-registered', [UsersController::class, 'registered'])->name('user-registered')->middleware('only_admin');
     Route::get('user-approve/{slug}', [UsersController::class, 'approve'])->name('user-approve')->middleware('only_admin');
     
@@ -48,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::post('vehicle-add', [VehicleController::class, 'store'])->name('store')->middleware('only_admin');
     Route::get('/vehicle-edit/{slug}', [VehicleController::class, 'edit'])->middleware('only_admin');
     Route::put('/vehicle-edit/{slug}', [VehicleController::class, 'update'])->middleware('only_admin');
+    Route::get('/vehicle-detail/{slug}', [VehicleController::class, 'detail'])->middleware('only_admin');
     Route::get('vehicle-delete/{slug}', [VehicleController::class, 'delete'])->middleware('only_admin');
 
     Route::get('vehicle-logs', [VehicleLogsController::class, 'index'])->name('logs');
